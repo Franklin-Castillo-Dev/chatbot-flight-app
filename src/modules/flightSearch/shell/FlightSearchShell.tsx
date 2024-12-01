@@ -55,7 +55,7 @@ const FlightSearchShell: React.FC = () => {
       token // Usamos el token actualizado
     );
 
-    console.log(flights);
+    //console.log(flights);
     if (flights) {
       setAdultsSearch(adults);
       setTravelClassSearch(travelClass);

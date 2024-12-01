@@ -18,35 +18,27 @@ const FlightList: React.FC<FlightListProps> = ({
     return flightList.map((flight: any, index: number) => {
       const flyListSegmentsDeparture = flight.itineraries?.[0]?.segments || [];
       const flyListSegmentsArrival = flight.itineraries?.[1]?.segments || [];
-      const origin =
-        flight.itineraries?.[0]?.segments?.[0]?.departure?.iataCode;
-      const destination =
-        flight.itineraries?.[0]?.segments?.[
-          flight.itineraries[0]?.segments.length - 1
-        ]?.arrival?.iataCode;
-      const departureDate = flight.itineraries?.[0]?.segments?.[0]?.departure
-        ?.at
-        ? new Date(
-            flight.itineraries[0].segments[0].departure.at
-          ).toLocaleDateString()
-        : "No disponible";
-      const returnDate = flight.itineraries?.[1]?.segments?.[0]?.departure?.at
-        ? new Date(
-            flight.itineraries[1].segments[0].departure.at
-          ).toLocaleDateString()
-        : "No disponible";
-      const duration = flight.itineraries?.[0]?.duration || "No disponible";
-      const airline =
-        flight.itineraries?.[0]?.segments?.[0]?.carrierCode || "No disponible";
-      const price = `${flight.price?.total || "No disponible"} ${
-        flight.price?.currency || "No disponible"
-      }`;
 
       return {
-        flightNumber: `Vuelo ${index + 1}`, // Asigna un número de vuelo (Vuelo 1, Vuelo 2, etc.)
-        route: `Origen: ${origin} → Destino: ${destination}`,
-        departureDate,
-        returnDate,
+        flightNumber: `Vuelo ${index + 1}`, // Asigna un número de vuelo
+        route: `Origen: ${
+          flight.itineraries?.[0]?.segments?.[0]?.departure?.iataCode ||
+          "No disponible"
+        } → Destino: ${
+          flight.itineraries?.[0]?.segments?.[
+            flight.itineraries[0]?.segments.length - 1
+          ]?.arrival?.iataCode || "No disponible"
+        }`,
+        departureDate: flight.itineraries?.[0]?.segments?.[0]?.departure?.at
+          ? new Date(
+              flight.itineraries[0].segments[0].departure.at
+            ).toLocaleDateString()
+          : "No disponible",
+        returnDate: flight.itineraries?.[1]?.segments?.[0]?.departure?.at
+          ? new Date(
+              flight.itineraries[1].segments[0].departure.at
+            ).toLocaleDateString()
+          : "No disponible",
         outboundRoute: {
           numberOfStops: flyListSegmentsDeparture.length,
           segments: flyListSegmentsDeparture.map((segment: any) => ({
@@ -65,11 +57,15 @@ const FlightList: React.FC<FlightListProps> = ({
             arrivalTime: new Date(segment.arrival?.at).toLocaleTimeString(),
           })),
         },
-        duration,
-        airline,
+        duration: flight.itineraries?.[0]?.duration || "No disponible",
+        airline:
+          flight.itineraries?.[0]?.segments?.[0]?.carrierCode ||
+          "No disponible",
         travelClass: travelClassSelected,
-        price,
-        adults,
+        price: `${flight.price?.total || "No disponible"} ${
+          flight.price?.currency || "No disponible"
+        }`,
+        numAdults: adults, // Incluye el número de adultos
       };
     });
   };
