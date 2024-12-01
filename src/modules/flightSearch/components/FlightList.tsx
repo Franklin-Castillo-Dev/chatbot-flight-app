@@ -69,6 +69,7 @@ const FlightList: React.FC<FlightListProps> = ({
         airline,
         travelClass: travelClassSelected,
         price,
+        adults,
       };
     });
   };
