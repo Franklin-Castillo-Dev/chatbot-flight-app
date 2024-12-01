@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, CardFooter, Col, ListGroup, Row } from "react-bootstrap";
 import { Chatbot } from "../../chatbot/Chatbot";
+import FlightToast from "./FlightToast";
 
 interface FlightListProps {
   flightList: any[];
@@ -13,6 +14,8 @@ const FlightList: React.FC<FlightListProps> = ({
   adults,
   travelClassSelected,
 }) => {
+  const [showToast, setShowToast] = useState(false);
+
   // Crear el JSON para pasar al Chatbot
   const createChatbotData = () => {
     return flightList.map((flight: any, index: number) => {
@@ -68,6 +71,30 @@ const FlightList: React.FC<FlightListProps> = ({
         numAdults: adults, // Incluye el número de adultos
       };
     });
+  };
+
+  // Función para agregar vuelo al localStorage
+  const handleScheduleFlight = (flight: any) => {
+    // Obtener vuelos previos del localStorage, si existen
+    const storedFlights = JSON.parse(
+      localStorage.getItem("scheduledFlights") || "[]"
+    );
+
+    // Agregar el nuevo vuelo al array
+    storedFlights.push(flight);
+
+    // Guardar el array actualizado en localStorage
+    localStorage.setItem("scheduledFlights", JSON.stringify(storedFlights));
+
+    console.log("storedFlights", storedFlights);
+
+    // Mostrar el Toast
+    setShowToast(true);
+
+    // Ocultar el Toast después de 3 segundos
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   return (
@@ -207,7 +234,19 @@ const FlightList: React.FC<FlightListProps> = ({
                       >
                         Ver en Skyscanner
                       </Button>
-                      <Button variant="primary">Agendar Vuelo</Button>
+                      <Button
+                        variant="primary"
+                        onClick={() =>
+                          handleScheduleFlight(createChatbotData()[flightIndex])
+                        }
+                      >
+                        Agendar Vuelo
+                      </Button>
+                      {/* Componente Toast */}
+                      <FlightToast
+                        show={showToast}
+                        onClose={() => setShowToast(false)}
+                      />
                     </div>
                   </CardFooter>
                 </Card>
