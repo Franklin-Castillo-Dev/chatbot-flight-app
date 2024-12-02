@@ -4,6 +4,7 @@ import { FlightSearchShell } from "./modules/flightSearch/shell/FlightSearchShel
 import { AppShell } from "./modules/app-shell/AppShell";
 import { ErrorPage } from "./modules/error-page/ErrorPage";
 import { ScrollToTop } from "./services/scrollToTop";
+import FlightCalendar from "./modules/calendar/FlightCalendar";
 
 const router = createBrowserRouter([
   {
@@ -23,11 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "calendar",
-        element: (
-          <>
-            <p>Calendario</p>
-          </>
-        ),
+        element: <FlightCalendar />,
       },
     ],
   },

@@ -76,3 +76,43 @@ export const fetchFlightsFromAmadeus = async (
     return null;
   }
 };
+
+export const searchAirportOrCity = async (
+  keyword: string,
+  token: string,
+  limit: number = 20, // Número de resultados a obtener por página
+  offset: number = 0 // Página de inicio (si quieres paginación)
+): Promise<any | null> => {
+  try {
+    const response = await axios.get(
+      `https://test.api.amadeus.com/v1/reference-data/locations`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          subType: "CITY,AIRPORT", // Búsqueda para ciudades y aeropuertos
+          keyword, // Texto a buscar (ciudad o aeropuerto)
+          page: { limit, offset }, // Parámetros de paginación
+          sort: "analytics.travelers.score", // Ordenar por tráfico de viajeros
+          view: "FULL", // Detalles completos de la ubicación
+        },
+      }
+    );
+    //console.log("aerports", response.data);
+    return response.data;
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error al buscar aeropuertos o ciudades:",
+        error.response?.data || error.message
+      );
+    } else {
+      console.error(
+        "Error desconocido al buscar aeropuertos o ciudades:",
+        error
+      );
+    }
+    return null;
+  }
+};

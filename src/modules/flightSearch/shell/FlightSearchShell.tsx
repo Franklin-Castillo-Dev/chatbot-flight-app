@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { AirportModal } from "../components/AirportModal";
 import { FlightList } from "../components/FlightList";
 import { FlightSearchForm } from "../components/FlightSearchForm";
 import {
@@ -20,9 +19,7 @@ const FlightSearchShell: React.FC = () => {
   const [nonStop, setNonStop] = useState("false");
   const [loading, setLoading] = useState(false);
   const [flightList, setFlightList] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [airportList, setAirportList] = useState([]);
-  const [selectedCity, setSelectedCity] = useState("");
+
   const [accessToken, setAccessToken] = useState<string | null>("");
 
   const fetchFlights = async () => {
@@ -90,15 +87,6 @@ const FlightSearchShell: React.FC = () => {
         flightList={flightList}
         adults={adultsSearch}
         travelClassSelected={travelClassSearch}
-      />
-      <AirportModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        airportList={airportList}
-        selectedCity={selectedCity}
-        setSelectedCity={setSelectedCity}
-        setOrigin={setOrigin}
-        setDestination={setDestination}
       />
     </>
   );

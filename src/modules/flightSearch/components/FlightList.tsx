@@ -86,7 +86,7 @@ const FlightList: React.FC<FlightListProps> = ({
     // Guardar el array actualizado en localStorage
     localStorage.setItem("scheduledFlights", JSON.stringify(storedFlights));
 
-    console.log("storedFlights", storedFlights);
+    //console.log("storedFlights", storedFlights);
 
     // Mostrar el Toast
     setShowToast(true);
