@@ -3,7 +3,7 @@
 Crear un archivo .env en la carpeta raiz del proyecto.
 El Archivo .env debe tener la siguiente estructura:
 
-```plaintext
+```env
 VITE_AMADEUS_API_KEY=amadeus_api_key
 VITE_AMADEUS_API_SECRET=amadeus_Secret
 VITE_OPENAI_API_KEY=openai_key
