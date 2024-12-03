@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, CardFooter, Col, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, CardFooter, ListGroup } from "react-bootstrap";
 import { Chatbot } from "../../chatbot/Chatbot";
 import FlightToast from "./FlightToast";
 
