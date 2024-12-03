@@ -131,7 +131,24 @@ const FlightList: React.FC<FlightListProps> = ({
                     flight.itineraries[1].segments[0].departure.at
                   ).toLocaleDateString()
                 : "No disponible";
-              const skyscannerUrl = `https://www.skyscanner.net/transport/flights/${origin}/${destination}/241206/241212/?adultsv2=${adults}&cabinclass=economy&childrenv2=&inboundaltsenabled=false&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1`;
+
+              const departureDateSkyApi = flight.itineraries?.[0]?.segments?.[0]
+                ?.departure?.at
+                ? new Date(flight.itineraries[0].segments[0].departure.at)
+                    .toISOString()
+                    .slice(2, 10) // Obtiene "YY-MM-DD"
+                    .replace(/-/g, "") // Remueve los guiones
+                : "No disponible";
+
+              const returnDateSkyApi = flight.itineraries?.[1]?.segments?.[0]
+                ?.departure?.at
+                ? new Date(flight.itineraries[1].segments[0].departure.at)
+                    .toISOString()
+                    .slice(2, 10) // Obtiene "YY-MM-DD"
+                    .replace(/-/g, "") // Remueve los guiones
+                : "No disponible";
+
+              const skyscannerUrl = `https://www.skyscanner.net/transport/flights/${origin}/${destination}/${departureDateSkyApi}/${returnDateSkyApi}/?adultsv2=${adults}&cabinclass=economy&childrenv2=&inboundaltsenabled=false&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1`;
 
               return (
                 <Card
