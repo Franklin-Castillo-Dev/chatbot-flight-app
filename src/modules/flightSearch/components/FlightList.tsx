@@ -148,7 +148,7 @@ const FlightList: React.FC<FlightListProps> = ({
                     .replace(/-/g, "") // Remueve los guiones
                 : "No disponible";
 
-              const skyscannerUrl = `https://www.skyscanner.net/transport/flights/${origin}/${destination}/${departureDateSkyApi}/${returnDateSkyApi}/?adultsv2=${adults}&cabinclass=economy&childrenv2=&inboundaltsenabled=false&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1`;
+              const skyscannerUrl = `https://www.skyscanner.net/transport/flights/${origin}/${destination}/${departureDateSkyApi}/${returnDateSkyApi}/?adultsv2=${adults}&cabinclass=${travelClassSelected.toLowerCase()}&childrenv2=&inboundaltsenabled=false&outboundaltsenabled=false&preferdirects=false&ref=home&rtn=1`;
 
               return (
                 <Card
