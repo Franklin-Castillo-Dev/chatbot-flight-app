@@ -143,6 +143,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ flightData }) => {
               onClick={handleSendMessage}
               disabled={loading}
             >
+              <i className="bi bi-send-fill"></i>
               {loading ? (
                 <Spinner as="span" animation="border" size="sm" />
               ) : (

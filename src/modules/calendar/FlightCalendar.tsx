@@ -113,15 +113,17 @@ const FlightCalendar: React.FC = () => {
           eventClick={handleEventClick}
           locale={esLocale} // Establecer el idioma a español
         />
+        <Button
+          className="mt-4 align-items-right"
+          variant="danger"
+          onClick={clearLocalStorage}
+          style={{ marginBottom: "20px", alignSelf: "end" }}
+        >
+          <i className="bi bi-trash-fill"></i>
+          Limpiar todas mis Reservas
+        </Button>
       </div>
-
-      <Button
-        variant="danger"
-        onClick={clearLocalStorage}
-        style={{ marginBottom: "20px" }}
-      >
-        Limpiar todas mis Reservas
-      </Button>
+      
 
       {/* Modal con la información del vuelo */}
       <Modal show={showModal} onHide={handleCloseModal} size="lg">
